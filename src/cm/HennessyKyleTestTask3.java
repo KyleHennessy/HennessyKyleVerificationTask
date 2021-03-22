@@ -963,5 +963,38 @@ public class HennessyKyleTestTask3 {
 
         r = new Rate(park, normalRate, reducedRate, reducedPeriods, normalPeriods);
     }
+    //Task 3
+    @Test(expected = IllegalArgumentException.class)
+    public void normalPeriodsOverlapping() throws IllegalArgumentException{
+        CarParkKind carParkKind = CarParkKind.STUDENT;
+
+        BigDecimal normalRate = new BigDecimal(1);
+        BigDecimal reducedRate = new BigDecimal(0);
+
+        ArrayList<Period> normalPeriod = new ArrayList<>();
+        normalPeriod.add(new Period(6,23));
+        normalPeriod.add(new Period(1,20));
+        normalPeriod.add(new Period(18,23));
+        ArrayList<Period> reducedPeriod = new ArrayList<>();
+        reducedPeriod.add(new Period(4,10));
+        Rate r = new Rate(carParkKind,normalRate,reducedRate,reducedPeriod,normalPeriod);
+        Period p = new Period(5,9);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void reducedPeriodsOverlapping() throws IllegalArgumentException {
+        CarParkKind carParkKind = CarParkKind.STUDENT;
+
+        BigDecimal normalRate = new BigDecimal(1);
+        BigDecimal reducedRate = new BigDecimal(0);
+
+        ArrayList<Period> normalPeriod = new ArrayList<>();
+        normalPeriod.add(new Period(6, 23));
+        ArrayList<Period> reducedPeriod = new ArrayList<>();
+        reducedPeriod.add(new Period(4, 10));
+        reducedPeriod.add(new Period(1, 15));
+        reducedPeriod.add(new Period(4, 20));
+        Rate r = new Rate(carParkKind, normalRate, reducedRate, reducedPeriod, normalPeriod);
+        Period p = new Period(5,9);
+    }
 
 }
