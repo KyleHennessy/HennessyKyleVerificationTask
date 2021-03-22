@@ -8,7 +8,13 @@ public class VisitorRate implements ICarParkKindRates{
     public BigDecimal reduction(BigDecimal cost) {
         BigDecimal amountNotCharged = new BigDecimal(8);
         BigDecimal amountReduced = new BigDecimal(0.5);
-        BigDecimal result = cost.subtract(amountNotCharged).multiply(amountReduced);
-        return result;
+        //if cost less than 8 then return 0
+        if(cost.compareTo(amountNotCharged) == -1){
+            return BigDecimal.ZERO;
+        }
+        else {
+            BigDecimal result = cost.subtract(amountNotCharged).multiply(amountReduced);
+            return result;
+        }
     }
 }

@@ -1000,7 +1000,7 @@ public class HennessyKyleTestTask3 {
     //TDD tests
     //Testing the new visitor rate for normal period. first 8€ is free and after that its a 50% reduction
     @Test
-    public void newVisitorReductionRate1 (){
+    public void newVisitorReductionRate (){
         CarParkKind carParkKind = CarParkKind.VISITOR;
 
         BigDecimal normalRate = new BigDecimal(2);
@@ -1020,5 +1020,89 @@ public class HennessyKyleTestTask3 {
         Period parkingPeriod = new Period(1,10); //Parking for 9 hours
         assertEquals(BigDecimal.valueOf(5).setScale(2), r.calculate(parkingPeriod)); //Calculate = 5 as first 8€ is free and the rest reduced by 50%
     }
+    @Test
+    public void newVisitorReductionRate2(){
+        CarParkKind carParkKind = CarParkKind.VISITOR;
 
+        BigDecimal normalRate = new BigDecimal(4);
+        BigDecimal reducedRate = new BigDecimal(3);
+
+        ArrayList <Period> normalPeriods = new ArrayList();
+        ArrayList <Period> reducedPeriods = new ArrayList();
+
+        Period normalPeriod1 = new Period(1,18);
+        Period reducedPeriod1 = new Period(19,24);
+
+        normalPeriods.add(normalPeriod1);
+        reducedPeriods.add(reducedPeriod1);
+
+        Rate r = new Rate(carParkKind, normalRate, reducedRate, reducedPeriods, normalPeriods);
+
+        Period parkingPeriod = new Period(20,23); //Parking for 3 hours
+        assertEquals(BigDecimal.valueOf(0.50).setScale(2), r.calculate(parkingPeriod)); //Calculate = 5 as first 8€ is free and the rest reduced by 50%
+    }
+    //Testing management rate where less than minimum is paid
+    @Test
+    public void newManagementReductionRate(){
+        CarParkKind carParkKind = CarParkKind.MANAGEMENT;
+
+        BigDecimal normalRate = new BigDecimal(2);
+        BigDecimal reducedRate = new BigDecimal(1);
+
+        ArrayList <Period> normalPeriods = new ArrayList();
+        ArrayList <Period> reducedPeriods = new ArrayList();
+
+        Period normalPeriod1 = new Period(1,18);
+        Period reducedPeriod1 = new Period(20,22);
+
+        normalPeriods.add(normalPeriod1);
+        reducedPeriods.add(reducedPeriod1);
+
+        Rate r = new Rate(carParkKind, normalRate, reducedRate, reducedPeriods, normalPeriods);
+
+        Period parkingPeriod = new Period(23,24); //Parking for 1 hour in free period
+        assertEquals(BigDecimal.valueOf(3).setScale(2), r.calculate(parkingPeriod)); //Calculate = 3 as minimum payed is 3
+    }
+    @Test
+    public void newManagementReductionRate2(){
+        CarParkKind carParkKind = CarParkKind.MANAGEMENT;
+
+        BigDecimal normalRate = new BigDecimal(2);
+        BigDecimal reducedRate = new BigDecimal(1);
+
+        ArrayList <Period> normalPeriods = new ArrayList();
+        ArrayList <Period> reducedPeriods = new ArrayList();
+
+        Period normalPeriod1 = new Period(1,18);
+        Period reducedPeriod1 = new Period(20,22);
+
+        normalPeriods.add(normalPeriod1);
+        reducedPeriods.add(reducedPeriod1);
+
+        Rate r = new Rate(carParkKind, normalRate, reducedRate, reducedPeriods, normalPeriods);
+
+        Period parkingPeriod = new Period(1,4); //Parking for 3 hours in normal period
+        assertEquals(BigDecimal.valueOf(6).setScale(2), r.calculate(parkingPeriod)); //Calculate = 6
+    }
+    @Test
+    public void newManagementReductionRate3(){
+        CarParkKind carParkKind = CarParkKind.MANAGEMENT;
+
+        BigDecimal normalRate = new BigDecimal(2);
+        BigDecimal reducedRate = new BigDecimal(1);
+
+        ArrayList <Period> normalPeriods = new ArrayList();
+        ArrayList <Period> reducedPeriods = new ArrayList();
+
+        Period normalPeriod1 = new Period(1,18);
+        Period reducedPeriod1 = new Period(20,22);
+
+        normalPeriods.add(normalPeriod1);
+        reducedPeriods.add(reducedPeriod1);
+
+        Rate r = new Rate(carParkKind, normalRate, reducedRate, reducedPeriods, normalPeriods);
+
+        Period parkingPeriod = new Period(1,4); //Parking for 3 hours in normal period
+        assertEquals(BigDecimal.valueOf(6).setScale(2), r.calculate(parkingPeriod)); //Calculate = 6
+    }
 }

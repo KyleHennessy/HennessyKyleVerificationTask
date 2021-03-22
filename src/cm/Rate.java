@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static cm.CarParkKind.MANAGEMENT;
+import static cm.CarParkKind.VISITOR;
+
 public class Rate {
     private CarParkKind kind;
     private BigDecimal hourlyNormalRate;
@@ -95,11 +98,27 @@ public class Rate {
         BigDecimal total = (this.hourlyNormalRate.multiply(BigDecimal.valueOf(normalRateHours))).add(
                 this.hourlyReducedRate.multiply(BigDecimal.valueOf(reducedRateHours)));
 
-        switch (kind) {
+       /*switch (kind) {
             case VISITOR:
                 reductionRate = new VisitorRate();
                 total = reductionRate.reduction(total).setScale(2);
                 break;
+            case MANAGEMENT:
+                reductionRate = new ManagementRate();
+                total = reductionRate.reduction(total).setScale(2);
+                break;
+            case STUDENT:
+                break;
+            case STAFF:
+                break;
+        }*/
+        if (kind == VISITOR){
+            reductionRate = new VisitorRate();
+            total = reductionRate.reduction(total).setScale(2);
+        }
+        if (kind == MANAGEMENT){
+            reductionRate = new ManagementRate();
+            total = reductionRate.reduction(total).setScale(2);
         }
         return total;
     }
