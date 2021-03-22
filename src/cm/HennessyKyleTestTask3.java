@@ -286,7 +286,7 @@ public class HennessyKyleTestTask3 {
         r = new Rate(c, normalRate, reducedRate, normalPeriods, reducedPeriods);
     }
 
-    @org.junit.Test(expected = IllegalArgumentException.class)
+    /*@org.junit.Test(expected = IllegalArgumentException.class)
     public void rateTestCase14() throws IllegalArgumentException{
         Rate r;
 
@@ -428,7 +428,7 @@ public class HennessyKyleTestTask3 {
         reducedPeriods.add(reducedPeriod2);
 
         r = new Rate(c, normalRate, reducedRate, normalPeriods, reducedPeriods);
-    }
+    }*/
     //reducedPeriods = null
     @org.junit.Test(expected = IllegalArgumentException.class)
     public void rateTestCase20() throws IllegalArgumentException{
@@ -998,9 +998,9 @@ public class HennessyKyleTestTask3 {
         Period p = new Period(5,9);
     }
     //TDD tests
-    //Testing the new visitor rate. first 8€ is free and after that its a 50% reduction
+    //Testing the new visitor rate for normal period. first 8€ is free and after that its a 50% reduction
     @Test
-    public void newVisitorReductionRate (){
+    public void newVisitorReductionRate1 (){
         CarParkKind carParkKind = CarParkKind.VISITOR;
 
         BigDecimal normalRate = new BigDecimal(2);
@@ -1012,9 +1012,13 @@ public class HennessyKyleTestTask3 {
         Period normalPeriod1 = new Period(1,18);
         Period reducedPeriod1 = new Period(20,22);
 
+        normalPeriods.add(normalPeriod1);
+        reducedPeriods.add(reducedPeriod1);
+
         Rate r = new Rate(carParkKind, normalRate, reducedRate, reducedPeriods, normalPeriods);
 
         Period parkingPeriod = new Period(1,10); //Parking for 9 hours
-        assertEquals(BigDecimal.valueOf(5), r.calculate(parkingPeriod)); //Calculate = 8 as 4 hours at 2 euro per hour is 8
+        assertEquals(BigDecimal.valueOf(5).setScale(2), r.calculate(parkingPeriod)); //Calculate = 5 as first 8€ is free and the rest reduced by 50%
     }
+
 }
