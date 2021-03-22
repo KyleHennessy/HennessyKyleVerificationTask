@@ -1,4 +1,5 @@
 package cm;
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -84,8 +85,8 @@ public class HennessyKyleTestTask3 {
         r = new Rate(c, normalRate, reducedRate, normalPeriods, reducedPeriods);
     }
 
-    @org.junit.Test(expected = IllegalArgumentException.class)
-    public void rateTestCase4() throws IllegalArgumentException{
+    @org.junit.Test
+    public void rateTestCase4(){
         Rate r;
 
         CarParkKind c = CarParkKind.STAFF;
@@ -959,7 +960,7 @@ public class HennessyKyleTestTask3 {
         BigDecimal reducedRate = new BigDecimal(2);
 
         ArrayList<Period> normalPeriods = new ArrayList<Period>();
-        ArrayList<Period> reducedPeriods = new ArrayList<Period>();
+        ArrayList<Period> reducedPeriods = new ArrayList();
 
         r = new Rate(park, normalRate, reducedRate, reducedPeriods, normalPeriods);
     }
@@ -971,11 +972,11 @@ public class HennessyKyleTestTask3 {
         BigDecimal normalRate = new BigDecimal(1);
         BigDecimal reducedRate = new BigDecimal(0);
 
-        ArrayList<Period> normalPeriod = new ArrayList<>();
+        ArrayList<Period> normalPeriod = new ArrayList();
         normalPeriod.add(new Period(6,23));
         normalPeriod.add(new Period(1,20));
         normalPeriod.add(new Period(18,23));
-        ArrayList<Period> reducedPeriod = new ArrayList<>();
+        ArrayList<Period> reducedPeriod = new ArrayList();
         reducedPeriod.add(new Period(4,10));
         Rate r = new Rate(carParkKind,normalRate,reducedRate,reducedPeriod,normalPeriod);
         Period p = new Period(5,9);
@@ -987,14 +988,33 @@ public class HennessyKyleTestTask3 {
         BigDecimal normalRate = new BigDecimal(1);
         BigDecimal reducedRate = new BigDecimal(0);
 
-        ArrayList<Period> normalPeriod = new ArrayList<>();
+        ArrayList<Period> normalPeriod = new ArrayList();
         normalPeriod.add(new Period(6, 23));
-        ArrayList<Period> reducedPeriod = new ArrayList<>();
+        ArrayList<Period> reducedPeriod = new ArrayList();
         reducedPeriod.add(new Period(4, 10));
         reducedPeriod.add(new Period(1, 15));
         reducedPeriod.add(new Period(4, 20));
         Rate r = new Rate(carParkKind, normalRate, reducedRate, reducedPeriod, normalPeriod);
         Period p = new Period(5,9);
     }
+    //TDD tests
+    //Testing the new visitor rate. first 8€ is free and after that its a 50% reduction
+    @Test
+    public void newVisitorReductionRate (){
+        CarParkKind carParkKind = CarParkKind.VISITOR;
 
+        BigDecimal normalRate = new BigDecimal(2);
+        BigDecimal reducedRate = new BigDecimal(1);
+
+        ArrayList <Period> normalPeriods = new ArrayList();
+        ArrayList <Period> reducedPeriods = new ArrayList();
+
+        Period normalPeriod1 = new Period(1,18);
+        Period reducedPeriod1 = new Period(20,22);
+
+        Rate r = new Rate(carParkKind, normalRate, reducedRate, reducedPeriods, normalPeriods);
+
+        Period parkingPeriod = new Period(1,10); //Parking for 9 hours
+        assertEquals(BigDecimal.valueOf(5), r.calculate(parkingPeriod)); //Calculate = 8 as 4 hours at 2 euro per hour is 8
+    }
 }
