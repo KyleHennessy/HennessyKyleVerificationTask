@@ -550,8 +550,8 @@ public class HennessyKyleTestTask3 {
         r = new Rate(park, normalRate, reducedRate, reducedPeriods, normalPeriods);
     }
     //rates = 0
-    @org.junit.Test(expected = IllegalArgumentException.class)
-    public void calculateTestCase5() throws IllegalArgumentException{
+    @org.junit.Test
+    public void calculateTestCase5(){
         CarParkKind park = CarParkKind.STUDENT;
 
         BigDecimal normalRate = new BigDecimal(0);
