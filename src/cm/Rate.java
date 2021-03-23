@@ -92,6 +92,13 @@ public class Rate {
         }
         return isValid;
     }
+
+    /**
+     * calculates the overall cost of a stay, applying different rates depending on
+     * the kind of person (VISITOR,MANAGEMENT, STUDENT, STAFF)
+     * @param periodStay the time period at which the person has parked their car
+     * @return BigDecimal of the total cost of the stay
+     */
     public BigDecimal calculate(Period periodStay) {
         int normalRateHours = periodStay.occurences(normal);
         int reducedRateHours = periodStay.occurences(reduced);
