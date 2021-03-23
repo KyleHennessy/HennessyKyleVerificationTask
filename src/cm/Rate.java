@@ -96,22 +96,8 @@ public class Rate {
         int normalRateHours = periodStay.occurences(normal);
         int reducedRateHours = periodStay.occurences(reduced);
         BigDecimal total = (this.hourlyNormalRate.multiply(BigDecimal.valueOf(normalRateHours))).add(
-                this.hourlyReducedRate.multiply(BigDecimal.valueOf(reducedRateHours)));
+                            this.hourlyReducedRate.multiply(BigDecimal.valueOf(reducedRateHours)));
 
-       /*switch (kind) {
-            case VISITOR:
-                reductionRate = new VisitorRate();
-                total = reductionRate.reduction(total).setScale(2);
-                break;
-            case MANAGEMENT:
-                reductionRate = new ManagementRate();
-                total = reductionRate.reduction(total).setScale(2);
-                break;
-            case STUDENT:
-                break;
-            case STAFF:
-                break;
-        }*/
         if (kind == VISITOR){
             reductionRate = new VisitorRate();
             total = reductionRate.reduction(total).setScale(2, RoundingMode.CEILING);
@@ -122,6 +108,10 @@ public class Rate {
         }
         if (kind == STUDENT){
             reductionRate = new StudentRate();
+            total = reductionRate.reduction(total).setScale(2, RoundingMode.CEILING);
+        }
+        if(kind == STAFF){
+            reductionRate = new StaffRate();
             total = reductionRate.reduction(total).setScale(2, RoundingMode.CEILING);
         }
         return total;
