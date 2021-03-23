@@ -285,150 +285,6 @@ public class HennessyKyleTestTask3 {
 
         r = new Rate(c, normalRate, reducedRate, normalPeriods, reducedPeriods);
     }
-
-    /*@org.junit.Test(expected = IllegalArgumentException.class)
-    public void rateTestCase14() throws IllegalArgumentException{
-        Rate r;
-
-        CarParkKind c = CarParkKind.STAFF;
-
-        BigDecimal normalRate = new BigDecimal(12);
-        BigDecimal reducedRate = new BigDecimal(5);
-
-        ArrayList<Period> normalPeriods = new ArrayList<Period>();
-        ArrayList<Period> reducedPeriods = new ArrayList<Period>();
-
-        Period normalPeriod1 = new Period(5,6);
-        Period normalPeriod2 = null;
-
-
-        normalPeriods.add(normalPeriod1);
-        normalPeriods.add(normalPeriod2);
-
-        Period reducedPeriod1 = new Period(7,9);
-        Period reducedPeriod2 = new Period(11,15);
-        reducedPeriods.add(reducedPeriod1);
-        reducedPeriods.add(reducedPeriod2);
-
-        r = new Rate(c, normalRate, reducedRate, normalPeriods, reducedPeriods);
-    }
-
-    @org.junit.Test(expected = IllegalArgumentException.class)
-    public void rateTestCase15() throws IllegalArgumentException{
-        Rate r;
-
-        CarParkKind c = CarParkKind.STAFF;
-
-        BigDecimal normalRate = new BigDecimal(12);
-        BigDecimal reducedRate = new BigDecimal(5);
-
-        ArrayList<Period> normalPeriods = new ArrayList<Period>();
-        ArrayList<Period> reducedPeriods = new ArrayList<Period>();
-
-        Period normalPeriod1 = new Period(5,6);
-        Period normalPeriod2 = new Period(1,4);
-
-
-        normalPeriods.add(normalPeriod1);
-        normalPeriods.add(normalPeriod2);
-
-        Period reducedPeriod1 = new Period(7,9);
-        Period reducedPeriod2 = null;
-        reducedPeriods.add(reducedPeriod1);
-        reducedPeriods.add(reducedPeriod2);
-
-        r = new Rate(c, normalRate, reducedRate, normalPeriods, reducedPeriods);
-    }
-
-    @org.junit.Test(expected = IllegalArgumentException.class)
-    public void rateTestCase16() throws IllegalArgumentException{
-        Rate r;
-
-        CarParkKind c = CarParkKind.STAFF;
-
-        BigDecimal normalRate = new BigDecimal(12);
-        BigDecimal reducedRate = new BigDecimal(5);
-
-        ArrayList<Period> normalPeriods = new ArrayList<Period>();
-        ArrayList<Period> reducedPeriods = new ArrayList<Period>();
-
-        Period reducedPeriod1 = new Period(7,9);
-        Period reducedPeriod2 = new Period(11,15);
-        reducedPeriods.add(reducedPeriod1);
-        reducedPeriods.add(reducedPeriod2);
-
-        r = new Rate(c, normalRate, reducedRate, normalPeriods, reducedPeriods);
-    }
-
-    @org.junit.Test(expected = IllegalArgumentException.class)
-    public void rateTestCase17() throws IllegalArgumentException{
-        Rate r;
-
-        CarParkKind c = CarParkKind.STAFF;
-
-        BigDecimal normalRate = new BigDecimal(12);
-        BigDecimal reducedRate = new BigDecimal(5);
-
-        ArrayList<Period> normalPeriods = new ArrayList<Period>();
-        ArrayList<Period> reducedPeriods = new ArrayList<Period>();
-
-        Period normalPeriod1 = new Period(5,6);
-        Period normalPeriod2 = new Period(1,4);
-        normalPeriods.add(normalPeriod1);
-        normalPeriods.add(normalPeriod2);
-
-        r = new Rate(c, normalRate, reducedRate, normalPeriods, reducedPeriods);
-    }
-
-    @org.junit.Test(expected = IllegalArgumentException.class)
-    public void rateTestCase18() throws IllegalArgumentException{
-        Rate r;
-
-        CarParkKind c = CarParkKind.STAFF;
-
-        BigDecimal normalRate = new BigDecimal(12);
-        BigDecimal reducedRate = new BigDecimal(5);
-
-        ArrayList<Period> normalPeriods = new ArrayList<Period>();
-        ArrayList<Period> reducedPeriods = new ArrayList<Period>();
-
-        Period normalPeriod1 = null;
-        Period normalPeriod2 = new Period(5,6);
-        normalPeriods.add(normalPeriod1);
-        normalPeriods.add(normalPeriod2);
-
-        Period reducedPeriod1 = new Period(7,9);
-        Period reducedPeriod2 = new Period(11,15);
-        reducedPeriods.add(reducedPeriod1);
-        reducedPeriods.add(reducedPeriod2);
-
-        r = new Rate(c, normalRate, reducedRate, normalPeriods, reducedPeriods);
-    }
-
-    @org.junit.Test(expected = IllegalArgumentException.class)
-    public void rateTestCase19() throws IllegalArgumentException{
-        Rate r;
-
-        CarParkKind c = CarParkKind.STAFF;
-
-        BigDecimal normalRate = new BigDecimal(12);
-        BigDecimal reducedRate = new BigDecimal(5);
-
-        ArrayList<Period> normalPeriods = new ArrayList<Period>();
-        ArrayList<Period> reducedPeriods = new ArrayList<Period>();
-
-        Period normalPeriod1 = new Period(5,6);
-        Period normalPeriod2 = new Period(1,4);
-        normalPeriods.add(normalPeriod1);
-        normalPeriods.add(normalPeriod2);
-
-        Period reducedPeriod1 = null;
-        Period reducedPeriod2 = new Period(11,15);
-        reducedPeriods.add(reducedPeriod1);
-        reducedPeriods.add(reducedPeriod2);
-
-        r = new Rate(c, normalRate, reducedRate, normalPeriods, reducedPeriods);
-    }*/
     //reducedPeriods = null
     @org.junit.Test(expected = IllegalArgumentException.class)
     public void rateTestCase20() throws IllegalArgumentException{
@@ -1104,5 +960,47 @@ public class HennessyKyleTestTask3 {
 
         Period parkingPeriod = new Period(1,4); //Parking for 3 hours in normal period
         assertEquals(BigDecimal.valueOf(6).setScale(2), r.calculate(parkingPeriod)); //Calculate = 6
+    }
+    @Test
+    public void newStudentReductionRate(){
+        CarParkKind carParkKind = CarParkKind.STUDENT;
+
+        BigDecimal normalRate = new BigDecimal(2);
+        BigDecimal reducedRate = new BigDecimal(1);
+
+        ArrayList <Period> normalPeriods = new ArrayList();
+        ArrayList <Period> reducedPeriods = new ArrayList();
+
+        Period normalPeriod1 = new Period(1,18);
+        Period reducedPeriod1 = new Period(20,22);
+
+        normalPeriods.add(normalPeriod1);
+        reducedPeriods.add(reducedPeriod1);
+
+        Rate r = new Rate(carParkKind, normalRate, reducedRate, reducedPeriods, normalPeriods);
+
+        Period parkingPeriod = new Period(1,6); //Parking for 5 hours in normal period
+        assertEquals(BigDecimal.valueOf(8.88).setScale(2), r.calculate(parkingPeriod)); //Calculate = 3 as minimum payed is 3
+    }
+    @Test
+    public void newStudentReductionRate2(){
+        CarParkKind carParkKind = CarParkKind.STUDENT;
+
+        BigDecimal normalRate = new BigDecimal(2);
+        BigDecimal reducedRate = new BigDecimal(1);
+
+        ArrayList <Period> normalPeriods = new ArrayList();
+        ArrayList <Period> reducedPeriods = new ArrayList();
+
+        Period normalPeriod1 = new Period(1,18);
+        Period reducedPeriod1 = new Period(20,22);
+
+        normalPeriods.add(normalPeriod1);
+        reducedPeriods.add(reducedPeriod1);
+
+        Rate r = new Rate(carParkKind, normalRate, reducedRate, reducedPeriods, normalPeriods);
+
+        Period parkingPeriod = new Period(1,3); //Parking for 2 hours in normal period
+        assertEquals(BigDecimal.valueOf(4).setScale(2), r.calculate(parkingPeriod)); //Calculate = 3 as minimum payed is 3
     }
 }
