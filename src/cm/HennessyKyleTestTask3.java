@@ -488,7 +488,7 @@ public class HennessyKyleTestTask3 {
         normalPeriods.add(normalPeriod1);
 
         r = new Rate(park, normalRate, reducedRate, reducedPeriods, normalPeriods);
-        assertEquals(r.calculate(normalPeriod1), BigDecimal.valueOf(4)); //Calculate = 2 as normalRate is 1 and normalPeriod is 2 hours long
+        assertEquals(r.calculate(normalPeriod1), BigDecimal.valueOf(4).setScale(2)); //Calculate = 2 as normalRate is 1 and normalPeriod is 2 hours long
     }
     //Valid input, normal rate = 2
     @Test
@@ -507,7 +507,7 @@ public class HennessyKyleTestTask3 {
         normalPeriods.add(normalPeriod1);
 
         r = new Rate(park, normalRate, reducedRate, reducedPeriods, normalPeriods);
-        assertEquals(BigDecimal.valueOf(4), r.calculate(normalPeriod1)); //Calculate = 4 as normalRate is 2 and reducedPeriod is 2 hours long
+        assertEquals(BigDecimal.valueOf(4).setScale(2), r.calculate(normalPeriod1)); //Calculate = 4 as normalRate is 2 and reducedPeriod is 2 hours long
     }
     //Valid input, reduced rate = 2
     @Test
@@ -526,7 +526,7 @@ public class HennessyKyleTestTask3 {
         reducedPeriods.add(reducedPeriod1);
 
         r = new Rate(park, normalRate, reducedRate, reducedPeriods, normalPeriods);
-        assertEquals(BigDecimal.valueOf(4), r.calculate(reducedPeriod1)); //Calculate = 4 as normalRate is 2 and reducedPeriod is 2 hours long
+        assertEquals(BigDecimal.valueOf(4).setScale(2), r.calculate(reducedPeriod1)); //Calculate = 4 as normalRate is 2 and reducedPeriod is 2 hours long
     }
     //Valid input, normalPeriod normal rate = 10
     @Test
@@ -545,7 +545,7 @@ public class HennessyKyleTestTask3 {
         normalPeriods.add(normalPeriod1);
 
         r = new Rate(park, normalRate, reducedRate, reducedPeriods, normalPeriods);
-        assertEquals(BigDecimal.valueOf(20), r.calculate(normalPeriod1)); //Calculate = 4 as normalRate is 2 and reducedPeriod is 2 hours long
+        assertEquals(BigDecimal.valueOf(16).setScale(2), r.calculate(normalPeriod1)); //Calculate = 4 as normalRate is 2 and reducedPeriod is 2 hours long
     }
     //Valid input, free hours outside normalPeriod
     @Test
@@ -566,7 +566,7 @@ public class HennessyKyleTestTask3 {
         Period freePeriod = new Period(11,14);
 
         r = new Rate(park, normalRate, reducedRate, reducedPeriods, normalPeriods);
-        assertEquals( BigDecimal.valueOf(0), r.calculate(freePeriod)); //Calculate = 0 as parking in free times (11-14 is free)
+        assertEquals( BigDecimal.valueOf(0).setScale(2), r.calculate(freePeriod)); //Calculate = 0 as parking in free times (11-14 is free)
     }
 
     //Valid input, free hours outside reducedPeriod
@@ -588,7 +588,7 @@ public class HennessyKyleTestTask3 {
         Period freePeriod = new Period(10,14);
 
         r = new Rate(park, normalRate, reducedRate, reducedPeriods, normalPeriods);
-        assertEquals(BigDecimal.valueOf(0), r.calculate(freePeriod)); //Calculate = 0 as parking during free hours
+        assertEquals(BigDecimal.valueOf(0).setScale(2), r.calculate(freePeriod)); //Calculate = 0 as parking during free hours
     }
 
     //Valid input, free hours 0-10 + 3 hours paid reducedPeriod
@@ -610,7 +610,7 @@ public class HennessyKyleTestTask3 {
         Period freePeriod = new Period(7,13);
 
         r = new Rate(park, normalRate, reducedRate, reducedPeriods, normalPeriods);
-        assertEquals(BigDecimal.valueOf(6), r.calculate(freePeriod)); //Calculate = 6 as parking during free hours + 3 hours parked in reduced time
+        assertEquals(BigDecimal.valueOf(6).setScale(2), r.calculate(freePeriod)); //Calculate = 6 as parking during free hours + 3 hours parked in reduced time
     }
 
     //Valid input, 2 periods in each list testing normalPeriod
@@ -637,7 +637,7 @@ public class HennessyKyleTestTask3 {
         reducedPeriods.add(reducedPeriod2);
 
         r = new Rate(park, normalRate, reducedRate, reducedPeriods, normalPeriods);
-        assertEquals(BigDecimal.valueOf(8), r.calculate(normalPeriod1)); //Calculate = 8 as 4 hours at 2 euro per hour is 8
+        assertEquals(BigDecimal.valueOf(8).setScale(2), r.calculate(normalPeriod1)); //Calculate = 8 as 4 hours at 2 euro per hour is 8
     }
     //Valid input, 2 periods in each testing normalPeriod
     @Test
@@ -663,7 +663,7 @@ public class HennessyKyleTestTask3 {
         reducedPeriods.add(reducedPeriod2);
 
         r = new Rate(park, normalRate, reducedRate, reducedPeriods, normalPeriods);
-        assertEquals(BigDecimal.valueOf(2), r.calculate(reducedPeriod2)); //Calculate = 8 as 4 hours at 2 euro per hour is 8
+        assertEquals(BigDecimal.valueOf(2).setScale(2), r.calculate(reducedPeriod2)); //Calculate = 8 as 4 hours at 2 euro per hour is 8
     }
 
     //Duration test case
