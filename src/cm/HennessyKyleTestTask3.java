@@ -980,7 +980,7 @@ public class HennessyKyleTestTask3 {
         Rate r = new Rate(carParkKind, normalRate, reducedRate, reducedPeriods, normalPeriods);
 
         Period parkingPeriod = new Period(1,6); //Parking for 5 hours in normal period
-        assertEquals(BigDecimal.valueOf(8.88).setScale(2), r.calculate(parkingPeriod)); //Calculate = 3 as minimum payed is 3
+        assertEquals(BigDecimal.valueOf(6.63).setScale(2), r.calculate(parkingPeriod)); //Calculate = 3 as minimum payed is 3
     }
     @Test
     public void newStudentReductionRate2(){

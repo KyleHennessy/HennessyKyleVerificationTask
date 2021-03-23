@@ -1,11 +1,11 @@
 package cm;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import static cm.CarParkKind.MANAGEMENT;
-import static cm.CarParkKind.VISITOR;
+import static cm.CarParkKind.*;
 
 public class Rate {
     private CarParkKind kind;
@@ -114,11 +114,15 @@ public class Rate {
         }*/
         if (kind == VISITOR){
             reductionRate = new VisitorRate();
-            total = reductionRate.reduction(total).setScale(2);
+            total = reductionRate.reduction(total).setScale(2, RoundingMode.CEILING);
         }
         if (kind == MANAGEMENT){
             reductionRate = new ManagementRate();
-            total = reductionRate.reduction(total).setScale(2);
+            total = reductionRate.reduction(total).setScale(2, RoundingMode.CEILING);
+        }
+        if (kind == STUDENT){
+            reductionRate = new StudentRate();
+            total = reductionRate.reduction(total).setScale(2, RoundingMode.CEILING);
         }
         return total;
     }
