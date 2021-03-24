@@ -897,6 +897,27 @@ public class HennessyKyleTestTask3 {
         Period parkingPeriod = new Period(20,23); //Parking for 3 hours
         assertEquals(BigDecimal.valueOf(0.50).setScale(2), r.calculate(parkingPeriod)); //Calculate = 5 as first 8€ is free and the rest reduced by 50%
     }
+    @Test
+    public void newVisitorReductionRate3(){
+        CarParkKind carParkKind = CarParkKind.VISITOR;
+
+        BigDecimal normalRate = new BigDecimal(4);
+        BigDecimal reducedRate = new BigDecimal(3);
+
+        ArrayList <Period> normalPeriods = new ArrayList();
+        ArrayList <Period> reducedPeriods = new ArrayList();
+
+        Period normalPeriod1 = new Period(1,18);
+        Period reducedPeriod1 = new Period(19,24);
+
+        normalPeriods.add(normalPeriod1);
+        reducedPeriods.add(reducedPeriod1);
+
+        Rate r = new Rate(carParkKind, normalRate, reducedRate, reducedPeriods, normalPeriods);
+
+        Period parkingPeriod = new Period(1,2); //Parking for 1 hours
+        assertEquals(BigDecimal.valueOf(0).setScale(2), r.calculate(parkingPeriod)); //Calculate = 0 as first 8€ is free
+    }
     //Testing management rate where less than minimum is paid
     @Test
     public void newManagementReductionRate(){
